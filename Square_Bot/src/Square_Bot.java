@@ -80,7 +80,7 @@ public class Square_Bot {
 				System.out.println("dropdown download done!");
 				break;
 			}
-			gui.textAppend("Download CSV complete\n");	
+				
 		}
 		
 		while(true) {
@@ -94,6 +94,7 @@ public class Square_Bot {
 				break;
 			}	
 		}
+		gui.textAppend("Download CSV complete\n");
 		
 	}
 	
