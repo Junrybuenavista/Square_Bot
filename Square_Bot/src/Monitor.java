@@ -4,10 +4,7 @@ public class Monitor {
 	public Monitor() {
 		
 		bot=new Square_Bot();
-		
-		bot.setBrowser();
-		bot.Login();
-		bot.process();
+		bot.run();
 	}
 	
 	public static void main(String args[]) {
