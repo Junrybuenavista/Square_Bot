@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
@@ -14,6 +15,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -24,15 +26,25 @@ public class Square_Bot {
 	String username;
 	String password;
 	GUI gui;
+	Date start,end;
+	SimpleDateFormat dateformat1;
+	SimpleDateFormat dateformat2;
+	String startDate,endDate;
 	
 	public Square_Bot() {
 		gui = new GUI();
 		
 	}
 	public void Login() {
+		dateformat1 = new SimpleDateFormat("yyyy-MM-dd");
+		dateformat2 = new SimpleDateFormat("MM/dd/yyyy");
+		dateInit();
 		
 		gui.textAppend("Starting Login\n");
 		driver.get("https://squareup.com/login");
+		try {
+			Thread.sleep(2000);
+		}catch(Exception ee) {ee.printStackTrace();}
 		driver.findElement(By.id("email")).sendKeys("cmeys@nbvresorts.com");
 		driver.findElement(By.id("password")).sendKeys("Breakers99");
 		driver.findElement(By.id("sign-in-button")).click();
@@ -40,6 +52,22 @@ public class Square_Bot {
 		try {
 			Thread.sleep(4000);
 		}catch(Exception ee) {ee.printStackTrace();}
+		
+	}
+	public void dateInit() {
+		
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, -2);
+        Date date1 = cal.getTime();    
+        startDate = dateformat2.format(date1);
+        
+        Calendar cal2 = Calendar.getInstance();
+        cal2.add(Calendar.DATE, -8);
+        Date date2 = cal2.getTime();    
+        endDate = dateformat2.format(date2);
+		
+		System.out.println(startDate);
+		System.out.println(endDate);
 		
 	}
 	public void process() {
@@ -58,17 +86,60 @@ public class Square_Bot {
 			}	
 		}
 		
+		//while(true) {
+		//	try {
+			//	Thread.sleep(1000);
+			//}catch(Exception ee) {ee.printStackTrace();}
+			//System.out.println("lastweek waiting!");
+			//if(driver.findElements(By.xpath("/html/body/div[2]/div/div/div[2]/div[2]/div[2]/div/div/div[1]/div[1]/div[1]/div/div/div/div[2]/button[4]")).size() != 0) {
+			//	driver.findElement(By.xpath("/html/body/div[2]/div/div/div[2]/div[2]/div[2]/div/div/div[1]/div[1]/div[1]/div/div/div/div[2]/button[4]")).click();
+			//	System.out.println("lastweek done!");
+			//	break;
+			//}	
+		//}
+		
+		while(true) {
+					try {
+						Thread.sleep(1000);
+					}catch(Exception ee) {ee.printStackTrace();}
+					System.out.println("start date waiting!");
+					if(driver.findElements(By.xpath("/html/body/div[2]/div/div/div[2]/div[2]/div[2]/div/div/div[1]/div[1]/div[1]/div/div/div/div[1]/div[2]/div[2]/div[1]/input")).size() != 0) {
+						driver.findElement(By.xpath("/html/body/div[2]/div/div/div[2]/div[2]/div[2]/div/div/div[1]/div[1]/div[1]/div/div/div/div[1]/div[2]/div[2]/div[1]/input")).clear();
+						
+						try {
+							Thread.sleep(2000);
+						}catch(Exception ee) {ee.printStackTrace();}
+						driver.findElement(By.xpath("/html/body/div[2]/div/div/div[2]/div[2]/div[2]/div/div/div[1]/div[1]/div[1]/div/div/div/div[1]/div[2]/div[2]/div[1]/input")).sendKeys(endDate);
+						System.out.println("lastweek done!");
+						break;
+					}	
+				}
+		try {
+			Thread.sleep(2000);
+		}catch(Exception ee) {ee.printStackTrace();}
+			
 		while(true) {
 			try {
 				Thread.sleep(1000);
 			}catch(Exception ee) {ee.printStackTrace();}
-			System.out.println("lastweek waiting!");
-			if(driver.findElements(By.xpath("/html/body/div[2]/div/div/div[2]/div[2]/div[2]/div/div/div[1]/div[1]/div[1]/div/div/div/div[2]/button[4]")).size() != 0) {
-				driver.findElement(By.xpath("/html/body/div[2]/div/div/div[2]/div[2]/div[2]/div/div/div[1]/div[1]/div[1]/div/div/div/div[2]/button[4]")).click();
+			System.out.println("end date waiting!");
+			if(driver.findElements(By.xpath("/html/body/div[2]/div/div/div[2]/div[2]/div[2]/div/div/div[1]/div[1]/div[1]/div/div/div/div[1]/div[2]/div[2]/div[2]/input")).size() != 0) {
+				driver.findElement(By.xpath("/html/body/div[2]/div/div/div[2]/div[2]/div[2]/div/div/div[1]/div[1]/div[1]/div/div/div/div[1]/div[2]/div[2]/div[2]/input")).clear();
+				driver.findElement(By.xpath("/html/body/div[2]/div/div/div[2]/div[2]/div[2]/div/div/div[1]/div[1]/div[1]/div/div/div/div[1]/div[2]/div[2]/div[2]/input")).clear();
+				try {
+					Thread.sleep(2000);
+				}catch(Exception ee) {ee.printStackTrace();}
+				driver.findElement(By.xpath("/html/body/div[2]/div/div/div[2]/div[2]/div[2]/div/div/div[1]/div[1]/div[1]/div/div/div/div[1]/div[2]/div[2]/div[2]/input")).sendKeys(startDate);
+				try {
+					Thread.sleep(2000);
+				}catch(Exception ee) {ee.printStackTrace();}
+				driver.findElement(By.xpath("/html/body/div[2]/div/div/div[2]/div[2]/div[2]/div/div/div[1]/div[1]/div[1]/div/div/div/div[1]/div[2]/div[2]/div[2]/input")).sendKeys(Keys.RETURN);
 				System.out.println("lastweek done!");
 				break;
 			}	
 		}
+		
+		
 		
 		while(true) {
 			try {
@@ -102,7 +173,7 @@ public class Square_Bot {
 		System.setProperty("webdriver.chrome.driver", "C:\\Jars\\chromedriver.exe");		
 		HashMap<String,Object> chromePrefs = new HashMap<String, Object>();
 		chromePrefs.put("plugins.always_open_pdf_externally", true);
-		//chromePrefs.put("download.default_directory", "C:"+File.separator+"xampp"+File.separator+"mysql"+File.separator+"data"+File.separator+"amazon");
+		chromePrefs.put("download.default_directory", "C:"+File.separator+"Square_download");
 		chromePrefs.put("excludeSwitches", "enable-popup-blocking");	
 		ChromeOptions options = new ChromeOptions();
 		options.setExperimentalOption("prefs", chromePrefs);
