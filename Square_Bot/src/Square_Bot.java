@@ -102,7 +102,7 @@ public class Square_Bot extends Thread{
 			}catch(Exception ee) {ee.printStackTrace();}
 			System.out.println("Waiting");
 			
-			 if(dateformatDay.format(new Date()).equalsIgnoreCase("Saturday")&&!currentdate.equalsIgnoreCase(dateformat1.format(new Date()))) {
+			 if(dateformatDay.format(new Date()).equalsIgnoreCase("Tuesday")&&!currentdate.equalsIgnoreCase(dateformat1.format(new Date()))) {
 					setBrowser();
 					setStartDate();
 					gui.textAppend("Processing\n");
@@ -205,13 +205,14 @@ public class Square_Bot extends Thread{
 							}
 							Process_CSV csv = new Process_CSV(driver,this);
 							csv.start();
+							gui.textAppend("Download CSV complete\n");
 							suspend();
 							try {
 								Thread.sleep(10000);
 							}catch(Exception ee) {ee.printStackTrace();}
-							
-							gui.textAppend("Download CSV complete\n");
 							currentdate = dateformat1.format(new Date());
+							gui.textAppend("Google sheet updated\nFrom: "+endDate+"\nTo: "+startDate+"\n\n");
+							
 							break;
 				}
 			 }	
@@ -234,6 +235,7 @@ public class Square_Bot extends Thread{
 	public void setDataBaseConnection() {
 		while(true) {
 			System.out.println("Database connecting");
+			gui.textAppend("Database connecting\n");
 			try{  
 				Thread.sleep(1500);
 				Class.forName("com.mysql.jdbc.Driver");  
