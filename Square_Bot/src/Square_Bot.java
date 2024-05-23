@@ -52,8 +52,8 @@ public class Square_Bot extends Thread{
 		try {
 			Thread.sleep(2000);
 		}catch(Exception ee) {ee.printStackTrace();}
-		driver.findElement(By.id("email")).sendKeys("cmeys@nbvresorts.com");
-		driver.findElement(By.id("password")).sendKeys("Breakers99");
+		driver.findElement(By.id("email")).sendKeys("fffff");
+		driver.findElement(By.id("password")).sendKeys("fffff");
 		driver.findElement(By.id("sign-in-button")).click();
 		gui.textAppend("Login complete\n");
 		try {
